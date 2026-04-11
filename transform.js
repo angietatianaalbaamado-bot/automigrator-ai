@@ -2,7 +2,7 @@ export default function transformer(file, api) {
   const j = api.jscodeshift;
   const root = j(file.source);
 
-  // 1. Cambiar providers
+  // 1. Cambiar ethers.providers → ethers
   root
     .find(j.MemberExpression, {
       object: {
@@ -17,13 +17,18 @@ export default function transformer(file, api) {
       );
     });
 
-  // 2. Cambiar utils (ej: ethers.utils → ethers)
+  // 2. Cambiar ethers.utils → ethers
   root
     .find(j.MemberExpression, {
       object: { name: "ethers" },
       property: { name: "utils" }
     })
     .replaceWith(() => j.identifier("ethers"));
+
+  // 3. Cambiar BigNumber → BigInt
+  root
+    .find(j.Identifier, { name: "BigNumber" })
+    .replaceWith(() => j.identifier("BigInt"));
 
   return root.toSource();
 }
