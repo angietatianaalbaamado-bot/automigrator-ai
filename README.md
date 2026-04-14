@@ -119,7 +119,7 @@ Instalar dependencias
 
 ## Demo en vivo
 
-https://github.com/angietatianaalbaamado-bot/automigrator-ai
+https://angietatianaalbaamado-bot.github.io/automigrator-ai/
 
 ## Estructura del proyecto
 ```
