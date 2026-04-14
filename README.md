@@ -115,7 +115,12 @@ Instalar dependencias
 
 ## Abrir en navegador:
 
- "automigrator-ai" at http://127.0.0.1:8080
+Ejecutar servidor local:
+
+node server.js
+
+Abrir en navegador:
+http://localhost:3000
 
 ## Demo en vivo
 
