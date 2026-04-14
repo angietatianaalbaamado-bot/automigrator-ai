@@ -115,11 +115,11 @@ Instalar dependencias
 
 ## Abrir en navegador:
 
-http://127.0.0.1:8080
+ "automigrator-ai" at http://127.0.0.1:8080
 
 ## Demo en vivo
 
-https://angietatianaalbaamado-bot.github.io/automigrator-ai/
+https://github.com/angietatianaalbaamado-bot/automigrator-ai
 
 ## Estructura del proyecto
 ```
