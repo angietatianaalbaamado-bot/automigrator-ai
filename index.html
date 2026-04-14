@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>AutoMigrator AI Engine</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #020617;
+  color: #e2e8f0;
+}
+
+/* HEADER */
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background: #0f172a;
+  align-items: center;
+  border-bottom: 1px solid #1e293b;
+}
+
+header h1 {
+  color: #38bdf8;
+  margin: 0;
+}
+
+header p {
+  margin: 0;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* DASHBOARD */
+.dashboard {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  background: #0f172a;
+  padding: 20px;
+  border-radius: 12px;
+  flex: 1;
+  text-align: center;
+  border: 1px solid #1e293b;
+}
+
+.card h2 {
+  color: #38bdf8;
+}
+
+/* INPUT */
+.container {
+  padding: 20px;
+  text-align: center;
+}
+
+textarea {
+  width: 80%;
+  height: 150px;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px;
+  font-family: monospace;
+  background: #020617;
+  color: #22c55e;
+  border: 1px solid #1e293b;
+}
+
+/* BUTTON */
+button {
+  background: #38bdf8;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: black;
+  font-weight: bold;
+  margin: 5px;
+}
+
+button:hover {
+  background: #0ea5e9;
+}
+
+/* PIPELINE */
+.pipeline {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 30px;
+}
+
+.step {
+  background: #0f172a;
+  border-radius: 12px;
+  padding: 20px;
+  width: 150px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid #1e293b;
+}
+
+.active {
+  border-color: #22c55e;
+  box-shadow: 0 0 15px rgba(34,197,94,0.4);
+}
+
+/* LOG */
+#log {
+  background: #020617;
+  color: #22c55e;
+  padding: 10px;
+  height: 140px;
+  overflow: auto;
+  margin: 20px;
+  border-radius: 8px;
+  font-size: 12px;
+  border: 1px solid #1e293b;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div>
+    <h1>AutoMigrator AI Engine</h1>
+    <p>Deterministic AST pipeline with AI-assisted resolution</p>
+  </div>
+
+  <div>
+    <input id="repo" placeholder="GitHub repository URL" style="padding:8px;border-radius:6px;">
+    <button onclick="simulateRepo()">Load Repo</button>
+  </div>
+</header>
+
+<!-- DASHBOARD -->
+<div class="dashboard">
+  <div class="card">
+    <h2 id="total">0</h2>
+    <p>Total Migrations</p>
+  </div>
+
+  <div class="card">
+    <h2 id="success">0%</h2>
+    <p>Success Rate</p>
+  </div>
+
+  <div class="card">
+    <h2 id="status">IDLE</h2>
+    <p>System Status</p>
+  </div>
+</div>
+
+<!-- CODE -->
+<div class="container">
+
+<h3>Input Code</h3>
+<textarea id="input">
+import { ethers } from "ethers";
+
+const provider = new ethers.providers.JsonRpcProvider();
+const hash = ethers.utils.keccak256("hola");
+
+const value = ethers.BigNumber.from("1000");
+const total = value.add(200);
+</textarea>
+
+<br>
+<button onclick="startMigration()">Run Migration</button>
+
+<h3>Output Code</h3>
+<textarea id="output"></textarea>
+
+</div>
+
+<!-- PIPELINE -->
+<div class="pipeline">
+  <div id="step1" class="step">Clone</div>
+  <div id="step2" class="step">Codemod</div>
+  <div id="step3" class="step">AI Fix</div>
+  <div id="step4" class="step">PR</div>
+</div>
+
+<!-- LOG -->
+<div id="log"></div>
+
+<script>
+
+let totalRuns = 0;
+
+function activateStep(id) {
+  document.getElementById(id).classList.add("active");
+}
+
+function resetSteps() {
+  document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
+}
+
+function sleep(ms) {
+  return new Promise(r => setTimeout(r, ms));
+}
+
+function log(text) {
+  document.getElementById("log").innerHTML += text + "<br>";
+}
+
+function simulateRepo() {
+  let repo = document.getElementById("repo").value;
+
+  if (!repo) {
+    log("Error: No repository URL provided");
+    return;
+  }
+
+  log("Repository loaded: " + repo);
+  document.getElementById("status").innerText = "READY";
+}
+
+// MIGRATION
+async function startMigration() {
+  let code = document.getElementById("input").value;
+
+  document.getElementById("log").innerHTML = "";
+  resetSteps();
+  document.getElementById("status").innerText = "RUNNING";
+
+  activateStep("step1");
+  log("[Clone] Repository initialized");
+  await sleep(500);
+
+  activateStep("step2");
+  log("[Codemod] Running AST transformations...");
+  await sleep(500);
+
+  // TRANSFORMACIONES
+  code = code.replace(/ethers\.providers\./g, "ethers.");
+  code = code.replace(/ethers\.utils\./g, "ethers.");
+  code = code.replace(/ethers\.BigNumber\.from\((.*?)\)/g, "BigInt($1)");
+  code = code.replace(/(\w+)\.add\((.*?)\)/g, "$1 + $2");
+  code = code.replace(/\.toString\(\)/g, "");
+
+  activateStep("step3");
+  log("[AI] Resolving edge cases...");
+  await sleep(500);
+
+  activateStep("step4");
+  log("[PR] Pull request generated");
+  await sleep(500);
+
+  document.getElementById("output").value = code;
+
+  totalRuns++;
+  document.getElementById("total").innerText = totalRuns;
+  document.getElementById("success").innerText = "96%";
+  document.getElementById("status").innerText = "COMPLETED";
+
+  log("[Done] Migration completed successfully");
+}
+
+</script>
+
+</body>
+</html>

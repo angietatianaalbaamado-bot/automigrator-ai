@@ -1,0 +1,9 @@
+{
+  "name": "automigrator-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "jscodeshift": "^0.15.0",
+    "recast": "^0.23.11"
+  }
+}
