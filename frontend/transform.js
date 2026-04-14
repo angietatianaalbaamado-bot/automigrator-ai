@@ -2,20 +2,28 @@ export default function transformer(file, api) {
   const j = api.jscodeshift;
   const root = j(file.source);
 
+  // 1. ethers.providers.X → ethers.X
   root
     .find(j.MemberExpression, {
       object: {
         object: { name: "ethers" },
         property: { name: "providers" }
-      },
-      property: { name: "JsonRpcProvider" }
+      }
     })
-    .replaceWith(() =>
-      j.memberExpression(
+    .replaceWith(path => {
+      return j.memberExpression(
         j.identifier("ethers"),
-        j.identifier("JsonRpcProvider")
-      )
-    );
+        path.node.property
+      );
+    });
+
+  // 2. ethers.utils.X → ethers.X
+  root
+    .find(j.MemberExpression, {
+      object: { name: "ethers" },
+      property: { name: "utils" }
+    })
+    .replaceWith(() => j.identifier("ethers"));
 
   return root.toSource();
-} 
+}
