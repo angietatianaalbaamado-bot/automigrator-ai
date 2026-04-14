@@ -31,7 +31,7 @@ Las soluciones tradicionales no escalan para proyectos reales.
 
 AutoMigrator AI implementa un enfoque híbrido:
 
-### 🔧 Transformaciones AST deterministas
+### Transformaciones AST deterministas
 
 Usando `jscodeshift`, el sistema analiza el código como estructura (AST) y aplica cambios seguros:
 
@@ -42,7 +42,7 @@ Estas transformaciones cubren la mayor parte de la migración sin errores.
 
 ---
 
-### 🤖 Capa asistida por IA (simulada)
+### Capa asistida por IA (simulada)
 
 Una capa de IA representa el manejo de casos complejos:
 
@@ -52,12 +52,12 @@ Una capa de IA representa el manejo de casos complejos:
 
 ---
 
-### 🔄 Pipeline visual de migración
+### Pipeline de migración
 
-1. Clonación del repositorio  
-2. Transformación AST  
-3. Procesamiento con IA  
-4. Generación de Pull Request  
+- Clonación del repositorio  
+- Transformación AST  
+- Procesamiento con IA  
+- Generación de Pull Request  
 
 ---
 
@@ -66,10 +66,10 @@ Una capa de IA representa el manejo de casos complejos:
 - Motor de transformación basado en AST  
 - Cambios deterministas (sin falsos positivos)  
 - Interfaz visual tipo dashboard  
-- Pipeline de migración interactivo  
+- Pipeline interactivo  
 - Logs en tiempo real  
 - Comparación antes/después  
-- Ejecución por línea de comandos (CLI)  
+- Ejecución por CLI  
 
 ---
 
@@ -82,40 +82,49 @@ import { ethers } from "ethers";
 
 const provider = new ethers.providers.JsonRpcProvider();
 const hash = ethers.utils.keccak256("hola");
+Salida (ethers.js v6)
+import { ethers } from "ethers";
 
+const provider = new ethers.JsonRpcProvider();
+const hash = ethers.keccak256("hola");
 ```
 
 ## Arquitectura
 
 El sistema está compuesto por tres capas:
 
-. Motor Codemod
-Basado en jscodeshift
-Realiza transformaciones AST
-Garantiza cambios seguros
-. Capa de ejecución
-Script CLI (migrate.js)
-Procesa archivos
-. Capa visual
-Interfaz web (index.html)
-Simula el pipeline
+## Motor Codemod
+- Basado en jscodeshift
+- Transformaciones AST seguras
 
+## Capa de ejecución
+- Script CLI (migrate.js)
+
+## Capa visual
+- Interfaz web (index.html)
 
 ## Cómo usar
+Instalar dependencias
+- npm install
 
-1. Instalar dependencias
-npm install
-2. Ejecutar migración
-node migrate.js input.js
-3. Ejecutar interfaz web
-live-server
+## Ejecutar migración
+- node migrate.js input.js
 
-## Abrir en navegador
+## Ejecutar interfaz web
+- live-server
+
+## Abrir en navegador:
+
 http://127.0.0.1:8080
 
-## Estructura del proyecto
+## Demo en vivo
 
+https://angietatianaalbaamado-bot.github.io/automigrator-ai/
+
+## Estructura del proyecto
+```
 automigrator-ai/
+
 ├── index.html
 ├── transform.js
 ├── migrate.js
@@ -124,42 +133,39 @@ automigrator-ai/
 ├── ai-helper.js
 ├── README.md
 ├── package.json
-
+```
 ## Resultados
-
-Automatiza gran parte de la migración
-Reduce el trabajo manual
-Minimiza errores
-Demuestra un flujo profesional
+- Automatiza gran parte de la migración
+- Reduce el trabajo manual
+- Minimiza errores
+- Flujo profesional funcional
 
 ## Contexto del Hackathon
 
-Proyecto desarrollado para:
+## Proyecto desarrollado para:
 
 Boring AI Hackathon 2026
 
 ## Objetivo
 
-Automatizar más del 80%
-Reducir intervención manual
-Crear una solución confiable
+- Automatizar más del 80%
+- Reducir intervención manual
+- Crear una solución confiable
 
 ## Evaluación
 
-Este proyecto cumple con:
-
-Transformaciones deterministas
-Caso real de migración
-Demo funcional
-Arquitectura clara
+- Transformaciones deterministas
+- Caso real de migración
+- Demo funcional
+- Arquitectura clara
 
 ## Futuras mejoras
 
-Soporte para más casos de ethers v6
-Procesamiento de repos completos
-Integración con GitHub
-IA real
-Análisis avanzado
+- Soporte para más casos de ethers v6
+- Procesamiento de repos completos
+- Integración con GitHub
+- IA real
+- Análisis avanzado
 
 
 ## Autor
