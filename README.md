@@ -10,9 +10,7 @@ Crear software es emocionante. Mantenerlo actualizado es lo que realmente lo ral
 
 Cada actualización, refactorización o migración implica riesgos, tiempo y esfuerzo manual.
 
-AutoMigrator AI nace para solucionar este problema.
-
-Convierte migraciones complejas en procesos rápidos, confiables y automatizados mediante una combinación de transformaciones de código deterministas y asistencia de inteligencia artificial.
+AutoMigrator AI convierte migraciones complejas en procesos rápidos, confiables y automatizados mediante una combinación de transformaciones de código deterministas y asistencia de inteligencia artificial.
 
 ---
 
@@ -33,32 +31,28 @@ Las soluciones tradicionales no escalan para proyectos reales.
 
 AutoMigrator AI implementa un enfoque híbrido:
 
-### 1. Transformaciones AST deterministas
+### 🔧 Transformaciones AST deterministas
 
 Usando `jscodeshift`, el sistema analiza el código como estructura (AST) y aplica cambios seguros:
 
-- `ethers.providers.X → ethers.X`
-- `ethers.utils.X → ethers.X`
+- `ethers.providers.X → ethers.X`  
+- `ethers.utils.X → ethers.X`  
 
-Estas transformaciones cubren la mayoría de la migración sin errores.
+Estas transformaciones cubren la mayor parte de la migración sin errores.
 
 ---
 
-### 2. Capa asistida por IA (simulada)
+### 🤖 Capa asistida por IA (simulada)
 
-Una capa de IA se encarga de representar el manejo de casos complejos:
+Una capa de IA representa el manejo de casos complejos:
 
 - Patrones no estándar  
 - Casos límite  
 - Correcciones adicionales  
 
-Esto refleja cómo funcionan sistemas reales en producción.
-
 ---
 
-### 3. Pipeline visual de migración
-
-Incluye una interfaz interactiva que simula un flujo profesional:
+### 🔄 Pipeline visual de migración
 
 1. Clonación del repositorio  
 2. Transformación AST  
@@ -69,13 +63,13 @@ Incluye una interfaz interactiva que simula un flujo profesional:
 
 ## Características
 
-- Motor de transformación basado en AST
-- Cambios deterministas (sin falsos positivos)
-- Interfaz visual tipo dashboard
-- Pipeline de migración interactivo
-- Simulación de logs en tiempo real
-- Comparación antes/después
-- Ejecución por línea de comandos (CLI)
+- Motor de transformación basado en AST  
+- Cambios deterministas (sin falsos positivos)  
+- Interfaz visual tipo dashboard  
+- Pipeline de migración interactivo  
+- Logs en tiempo real  
+- Comparación antes/después  
+- Ejecución por línea de comandos (CLI)  
 
 ---
 
@@ -89,81 +83,89 @@ import { ethers } from "ethers";
 const provider = new ethers.providers.JsonRpcProvider();
 const hash = ethers.utils.keccak256("hola");
 
-Salida (ethers.js v6)
-import { ethers } from "ethers";
+```
 
-const provider = new ethers.JsonRpcProvider();
-const hash = ethers.keccak256("hola");
+## Arquitectura
 
-Arquitectura
+El sistema está compuesto por tres capas:
 
-El sistema está compuesto por tres capas principales:
-
-Motor Codemod
+. Motor Codemod
 Basado en jscodeshift
 Realiza transformaciones AST
-Garantiza cambios seguros y predecibles
-Capa de ejecución
+Garantiza cambios seguros
+. Capa de ejecución
 Script CLI (migrate.js)
-Procesa archivos y aplica migraciones
-Capa de presentación
+Procesa archivos
+. Capa visual
 Interfaz web (index.html)
-Visualiza el pipeline de migración
-Cómo usar
+Simula el pipeline
+
+
+## Cómo usar
+
 1. Instalar dependencias
 npm install
-2. Ejecutar migración (CLI)
+2. Ejecutar migración
 node migrate.js input.js
 3. Ejecutar interfaz web
 live-server
 
-Abrir en navegador:
-
+## Abrir en navegador
 http://127.0.0.1:8080
-Estructura del proyecto
+
+## Estructura del proyecto
+
 automigrator-ai/
-├── index.html        # Interfaz visual
-├── transform.js      # Lógica de transformación AST
-├── migrate.js        # Ejecución de migración
-├── input.js          # Archivo de prueba
-├── server.js         # Servidor opcional
-├── ai-helper.js      # Simulación de IA
+├── index.html
+├── transform.js
+├── migrate.js
+├── input.js
+├── server.js
+├── ai-helper.js
 ├── README.md
 ├── package.json
-Resultados
+
+## Resultados
+
 Automatiza gran parte de la migración
 Reduce el trabajo manual
-Minimiza errores humanos
-Demuestra un flujo de migración profesional
-Contexto del Hackathon
+Minimiza errores
+Demuestra un flujo profesional
+
+## Contexto del Hackathon
 
 Proyecto desarrollado para:
 
 Boring AI Hackathon 2026
 
-Objetivo
-Automatizar más del 80% de migraciones
+## Objetivo
+
+Automatizar más del 80%
 Reducir intervención manual
-Crear una solución confiable y escalable
-Evaluación
+Crear una solución confiable
 
-Este proyecto cumple con los criterios:
+## Evaluación
 
-Transformaciones deterministas (sin errores)
-Caso real de migración (ethers.js v5 → v6)
+Este proyecto cumple con:
+
+Transformaciones deterministas
+Caso real de migración
 Demo funcional
 Arquitectura clara
-Aplicación en entornos reales
-Futuras mejoras
-Soporte para más patrones de ethers v6
-Procesamiento de múltiples archivos
-Integración con GitHub (PR automático)
-IA real (OpenAI u otros modelos)
-Análisis estático avanzado
-Autor
 
-Angie Tatiana Alba Amado 
+## Futuras mejoras
 
-Licencia
+Soporte para más casos de ethers v6
+Procesamiento de repos completos
+Integración con GitHub
+IA real
+Análisis avanzado
+
+
+## Autor
+
+Angie Tatiana Alba Amado
+
+## Licencia
 
 MIT
