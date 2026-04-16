@@ -1,7 +1,5 @@
-@"
 {
   "routes": [
     { "src": "/", "dest": "/index.html" }
   ]
 }
-"@ > vercel.json
