@@ -1,182 +1,76 @@
-# AutoMigrator AI Engine
+#  AutoMigrator AI Engine
 
-Motor de migración determinista para actualizar ethers.js de v5 a v6 utilizando transformaciones AST y procesamiento asistido por IA.
+Motor de migración determinista y asistido por IA para actualizar **ethers.js de v5 a v6**.
 
----
-
-## Introducción
-
-Crear software es emocionante. Mantenerlo actualizado es lo que realmente lo ralentiza todo.
-
-Cada actualización, refactorización o migración implica riesgos, tiempo y esfuerzo manual.
-
-AutoMigrator AI convierte migraciones complejas en procesos rápidos, confiables y automatizados mediante una combinación de transformaciones de código deterministas y asistencia de inteligencia artificial.
+[![Demo en vivo](https://img.shields.io/badge/Live%20Demo-blue)](https://angietatianaalbaamado-bot.github.io/automigrator-ai/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ---
 
-## Problema
+## El Problema
+Migrar de `ethers.js` v5 a v6 implica cambios profundos en la API, refactorizaciones manuales extensas y un alto riesgo de errores humanos. Los métodos tradicionales de migración no escalan para repositorios profesionales.
 
-Migrar de ethers.js v5 a v6 representa un reto real:
+##  La Solución: Enfoque Híbrido
+**AutoMigrator AI** automatiza este proceso mediante un flujo de trabajo de dos capas:
 
-- Cambios importantes en la API  
-- Refactorización manual en múltiples archivos  
-- Alto riesgo de errores humanos  
-- Procesos repetitivos y lentos  
+### 1. Motor de Transformación AST (Determinista)
+Utilizamos `jscodeshift` para analizar el código y aplicar cambios estructurales seguros, garantizando **cero falsos positivos**.
 
-Las soluciones tradicionales no escalan para proyectos reales.
+**Funciones clave del motor:**
+*   **Refactorización de Proveedores:** Automatiza la migración de `ethers.providers.X` a `ethers.X`.
+*   **Limpieza de utilidades:** Convierte `ethers.utils.X` a `ethers.X` de forma masiva.
+*   **Migración de Providers de Navegador:** Automatiza `Web3Provider` a `BrowserProvider` para entornos modernos.
+*   **Optimización de llamadas a contratos:** Convierte `contract.callStatic.method(...)` a `contract.method.staticCall(...)`.
+*   **Conversión de Tipos:** Automatiza `BigNumber.from(x)` a `BigInt(x)` para cumplir con los estándares v6.
 
----
-
-## Solución
-
-AutoMigrator AI implementa un enfoque híbrido:
-
-### Transformaciones AST deterministas
-
-Usando `jscodeshift`, el sistema analiza el código como estructura (AST) y aplica cambios seguros:
-
-- `ethers.providers.X → ethers.X`  
-- `ethers.utils.X → ethers.X`  
-
-Estas transformaciones cubren la mayor parte de la migración sin errores.
+### 2. Capa Asistida por IA
+Gestiona los casos excepcionales que el AST no puede resolver:
+*   Patrones de código no estándar.
+*   Casos límite en lógica de negocio.
+*   Refactorizaciones de testing y mocks.
 
 ---
 
-### Capa asistida por IA (simulada)
-
-Una capa de IA representa el manejo de casos complejos:
-
-- Patrones no estándar  
-- Casos límite  
-- Correcciones adicionales  
+##  Arquitectura del Pipeline
+1. **Análisis:** Análisis AST para identificar patrones `ethers.js` v5.
+2. **Transformación:** Aplicación de codemods deterministas.
+3. **Resolución:** Capa de IA para casos complejos.
+4. **Validación:** Comparación visual antes/después en el dashboard.
 
 ---
 
-### Pipeline de migración
+##  Cómo usar
 
-- Clonación del repositorio  
-- Transformación AST  
-- Procesamiento con IA  
-- Generación de Pull Request  
-
----
-
-## Características
-
-- Motor de transformación basado en AST  
-- Cambios deterministas (sin falsos positivos)  
-- Interfaz visual tipo dashboard  
-- Pipeline interactivo  
-- Logs en tiempo real  
-- Comparación antes/después  
-- Ejecución por CLI  
-
----
-
-## Demo
-
-### Entrada (ethers.js v5)
-
-```js
-import { ethers } from "ethers";
-
-const provider = new ethers.providers.JsonRpcProvider();
-const hash = ethers.utils.keccak256("hola");
-Salida (ethers.js v6)
-import { ethers } from "ethers";
-
-const provider = new ethers.JsonRpcProvider();
-const hash = ethers.keccak256("hola");
+### Requisitos previos
+```bash
+npm install
 ```
 
-## Arquitectura
-
-El sistema está compuesto por tres capas:
-
-## Motor Codemod
-- Basado en jscodeshift
-- Transformaciones AST seguras
-
-## Capa de ejecución
-- Script CLI (migrate.js)
-
-## Capa visual
-- Interfaz web (index.html)
-
-## Cómo usar
-Instalar dependencias
-- npm install
-
-## Ejecutar migración
-- node migrate.js input.js
-
-## Ejecutar interfaz web
-- live-server
-
-## Abrir en navegador:
-
-Ejecutar servidor local:
-
-node server.js
-
-Abrir en navegador:
-http://localhost:3000
-
-## Demo en vivo
-
-https://angietatianaalbaamado-bot.github.io/automigrator-ai/
-
-## Estructura del proyecto
+### Ejecutar migración por CLI
+```bash
+node migrate.js input.js
 ```
-automigrator-ai/
 
-├── index.html
-├── transform.js
-├── migrate.js
-├── input.js
-├── server.js
-├── ai-helper.js
-├── README.md
-├── package.json
+### Ejecutar Interfaz Web (Dashboard)
+```bash
+npm run demo
+# Abrir en http://127.0.0.1:8080
 ```
-## Resultados
-- Automatiza gran parte de la migración
-- Reduce el trabajo manual
-- Minimiza errores
-- Flujo profesional funcional
 
-## Contexto del Hackathon
+---
 
-## Proyecto desarrollado para:
+## Resultados Esperados
+*   **Automatización:** >80% de los patrones de migración cubiertos.
+*   **Fiabilidad:** Cambios deterministas sin efectos secundarios.
+*   **Impacto:** Reducción drástica del tiempo de mantenimiento de meses a minutos.
 
-Boring AI Hackathon 2026
+---
 
-## Objetivo
+##  Hackathon: Boring AI 2026
+Proyecto desarrollado para automatizar tareas repetitivas mediante IA, garantizando un flujo de trabajo de nivel profesional.
 
-- Automatizar más del 80%
-- Reducir intervención manual
-- Crear una solución confiable
-
-## Evaluación
-
-- Transformaciones deterministas
-- Caso real de migración
-- Demo funcional
-- Arquitectura clara
-
-## Futuras mejoras
-
-- Soporte para más casos de ethers v6
-- Procesamiento de repos completos
-- Integración con GitHub
-- IA real
-- Análisis avanzado
-
-
-## Autor
-
+##  Autor
 Angie Tatiana Alba Amado
 
-## Licencia
-
+##  Licencia
 MIT
