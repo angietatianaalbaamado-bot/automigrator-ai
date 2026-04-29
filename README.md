@@ -1,3 +1,5 @@
+![AutoMigrator AI Engine](imagen.jpg)
+
 #  AutoMigrator AI Engine
 
 Motor de migración determinista y asistido por IA para actualizar **ethers.js de v5 a v6**.
